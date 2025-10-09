@@ -1,15 +1,14 @@
-import { Router } from "express";
-import { refreshToken, logout } from "@/controllers/auth.controller";
-
-const router = Router();
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_controller_1 = require("../controllers/auth.controller");
+const router = (0, express_1.Router)();
 /**
  * @openapi
  * tags:
  *   - name: Auth
  *     description: Authentication endpoints
  */
-
 /**
  * @openapi
  * /auth/refresh:
@@ -21,8 +20,7 @@ const router = Router();
  *       '200':
  *         description: Token refreshed
  */
-router.post("/refresh", refreshToken);
-
+router.post("/refresh", auth_controller_1.refreshToken);
 /**
  * @openapi
  * /auth/logout:
@@ -34,6 +32,5 @@ router.post("/refresh", refreshToken);
  *       '200':
  *         description: Logged out
  */
-router.post("/logout", logout);
-
-export default router;
+router.post("/logout", auth_controller_1.logout);
+exports.default = router;

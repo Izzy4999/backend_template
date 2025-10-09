@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: API Documentation
+  version: 1.0.0
+  description: OpenAPI documentation for the backend template.
+servers:
+  - url: /api
+    description: Base API path
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+tags:
+  - name: Auth
+    description: Authentication endpoints
+
+paths:
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Refresh access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+              required: [refreshToken]
+      responses:
+        '200':
+          description: Token refreshed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+        '400':
+          description: Missing refresh token
+        '403':
+          description: Invalid or expired refresh token
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Logout user and revoke refresh token
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: Logged out
