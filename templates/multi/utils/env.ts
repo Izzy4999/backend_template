@@ -6,11 +6,6 @@ export const env = cleanEnv(process.env, {
   PORT: port({ default: 4000 }),
   JWT_SECRET: str(),
   REFRESH_SECRET: str(),
-  /** "single" = one refresh token per user, logout logs out everywhere; "multi" = multiple refresh tokens, logout only revokes the one sent */
-  AUTH_SESSION_MODE: str({
-    choices: ["single", "multi"],
-    default: "single",
-  }),
   EMAIL_USER: str(),
   EMAIL_PASS: str(),
   EMAIL_FROM: str(),

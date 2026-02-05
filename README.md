@@ -38,6 +38,7 @@ Required (see .env.example):
 - PORT: Server port (default 4000 in validation)
 - JWT_SECRET: Secret for access tokens
 - REFRESH_SECRET: Secret for refresh tokens
+- AUTH_SESSION_MODE: `single` (one refresh token per user, logout logs out everywhere) or `multi` (multiple refresh tokens, logout only revokes the one sent). Default `single`.
 - EMAIL_USER: SMTP username (e.g., Gmail)
 - EMAIL_PASS: SMTP password/app password
 - EMAIL_FROM: From email address
@@ -77,6 +78,7 @@ Configured in tsconfig.json with baseUrl=src and aliases like @utils/*.
 ## Auth Overview
 - utils/jwt.ts contains helpers to sign/verify access and refresh tokens
 - utils/tokenStore.ts is a simple in-memory store for refresh tokens (replace with Redis/DB in production)
+- **Session mode:** This repo supports three options (see `templates/README.md`). **(1) Env-based** (default): `src/` uses `AUTH_SESSION_MODE` in `.env` to switch single vs multi. **(2) Single-only:** copy `templates/single/` into `src/` for fixed single-session auth. **(3) Multi-only:** copy `templates/multi/` into `src/` for fixed multi-session auth.
 
 ## Email
 - utils/mailer.ts uses nodemailer with provided SMTP credentials
